@@ -1,5 +1,8 @@
 <?php namespace mcech\sql;
 
+use PDOStatement;
+use PDOException;
+
 /**
  * A table of data  representing a database result,  which is  usually generated
  * by executing a statement that queries the database.
@@ -16,7 +19,7 @@ class Result {
      *
      * @return array         An array containing the suggested column names
      *
-     * @throws PDOException  If a database access error occurs
+     * @throws PDOException If a database access error occurs
      */
     public function getColumnNames(): array {
         $result = array();
@@ -32,10 +35,10 @@ class Result {
      * the method  next makes the  first row the  current row;  the second  call
      * makes the second row the current row, and so on.
      *
-     * @return bool  true    If the new current row is valid;
-     *               false   If there are no more rows
+     * @return bool         true    If the new current row is valid;
+     *                      false   If there are no more rows
      *
-     * @throws PDOException  If a database access error occurs
+     * @throws PDOException If a database access error occurs
      */
     public function next(): bool {
         $this->row = $this->stmt->fetch();
@@ -46,14 +49,15 @@ class Result {
      * Gets the value of the designated column in the current row of this Result
      * object.
      *
-     * @param  $column       The first column is 0, the second is 1, ...
-     *                       The label for the column specified  with the SQL AS
-     *                       clause.  If  the SQL AS clause  was  not specified,
-     *                       then the label is the name of the column.
+     * @param  mixed        $column The first column is 0, the second is 1, ...
+     *                              The label for the column  specified with the
+     *                              SQL AS clause.  If the SQL AS clause was not
+     *                              specified, then the label is the name of the
+     *                              column.
      *
-     * @return mixed  An Object holding the column value
+     * @return mixed        An Object holding the column value
      *
-     * @throws PDOException  If a database access error occurs
+     * @throws PDOException If a database access error occurs
      */
     public function get(mixed $column): mixed {
         return $this->row[$column];
