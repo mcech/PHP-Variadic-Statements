@@ -14,7 +14,7 @@ use PDOException;
  * It is  strongly recommended  to  explicitly  commit  or  roll back  an active
  * transaction prior to destruction of a session.
  */
-class Connection {
+class Database {
     /**
      * Attempts to establish a connection to the given database URL.
      *
@@ -83,6 +83,19 @@ class Connection {
             throw new PDOException();
         }
         return $stmt->rowCount();
+    }
+
+    /**
+     * Returns the ID of the last inserted row or sequence value.
+     *
+     * @return int          Returns the ID of the last inserted row, or the last
+     *                      value  from  a sequence  object,  depending  on  the
+     *                      underlying driver.
+     *
+     * @throws PDOException If a database access error occurs
+     */
+    public function lastInsertID(): int {
+        return $this->con->lastInsertId();
     }
 
     /**

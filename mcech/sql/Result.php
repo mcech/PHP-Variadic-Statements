@@ -49,7 +49,8 @@ class Result {
      * Gets the value of the designated column in the current row of this Result
      * object.
      *
-     * @param  mixed        $column The first column is 0, the second is 1, ...
+     * @param  int|string   $column The first column is 0, the second is 1, ...
+     *                              or
      *                              The label for the column  specified with the
      *                              SQL AS clause.  If the SQL AS clause was not
      *                              specified, then the label is the name of the
@@ -59,7 +60,7 @@ class Result {
      *
      * @throws PDOException If a database access error occurs
      */
-    public function get(mixed $column): mixed {
+    public function get(int|string $column): mixed {
         return $this->row[$column];
     }
 
